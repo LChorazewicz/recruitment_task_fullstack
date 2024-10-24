@@ -14,6 +14,10 @@ services:
         resource: '../src/App/ExchangeRates/Infrastructure/Adapter/'
         tags: [ 'controller.service_arguments' ]
 
+    App\ExchangeRates\Infrastructure\Logger\:
+        resource: '../src/App/ExchangeRates/Infrastructure/Logger/'
+        tags: [ 'controller.service_arguments' ]
+
     App\ExchangeRates\Application\Service\:
         resource: '../src/App/ExchangeRates/Application/Service/'
         tags: [ 'controller.service_arguments' ]
