@@ -7,10 +7,12 @@ use App\ExchangeRates\Domain\Currency;
 class CZK implements Currency
 {
     private $averagePrice;
+    private $sellProfit;
 
-    public function __construct(float $averagePrice)
+    public function __construct(float $averagePrice, float $sellProfit)
     {
         $this->averagePrice = $averagePrice;
+        $this->sellProfit = $sellProfit;
     }
 
     public function getBuyPrice(): ?float
@@ -20,6 +22,6 @@ class CZK implements Currency
 
     public function getSellPrice(): float
     {
-        return $this->averagePrice + 0.15;
+        return $this->averagePrice + $this->sellProfit;
     }
 }

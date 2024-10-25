@@ -3,15 +3,15 @@
 namespace App\ExchangeRates\Infrastructure\Adapter;
 
 use App\ExchangeRates\Domain\Port\ExchangeRate;
-use App\ExchangeRates\Domain\Port\ExchangeRateProvider;
+use App\ExchangeRates\Domain\Port\ExchangeRatesProvider;
 use App\ExchangeRates\Domain\Port\Filter;
-use App\ExchangeRates\Infrastructure\Logger\Logger;
+use Psr\Log\LoggerInterface;
 
-class NBPExchangeRateAdapter implements ExchangeRateProvider
+class NBPExchangeRatesAdapter implements ExchangeRatesProvider
 {
     private $logger;
 
-    public function __construct(Logger $logger)
+    public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
@@ -30,7 +30,7 @@ class NBPExchangeRateAdapter implements ExchangeRateProvider
                 return in_array($rate['code'], $filter->getCurrencies());
             });
         } catch (\Exception $exception) {
-            $this->logger->log($exception);
+            $this->logger->error($exception);
         }
 
         $result = [];

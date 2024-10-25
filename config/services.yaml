@@ -14,16 +14,12 @@ services:
         resource: '../src/App/ExchangeRates/Infrastructure/Adapter/'
         tags: [ 'controller.service_arguments' ]
 
-    App\ExchangeRates\Infrastructure\Logger\:
-        resource: '../src/App/ExchangeRates/Infrastructure/Logger/'
-        tags: [ 'controller.service_arguments' ]
-
     App\ExchangeRates\Application\Service\:
         resource: '../src/App/ExchangeRates/Application/Service/'
         tags: [ 'controller.service_arguments' ]
 
-    App\ExchangeRates\Domain\Port\ExchangeRateProvider:
-        class: App\ExchangeRates\Infrastructure\Adapter\NBPExchangeRateAdapter
+    App\ExchangeRates\Domain\Port\ExchangeRatesProvider:
+        class: App\ExchangeRates\Infrastructure\Adapter\NBPExchangeRatesAdapter
 
     App\ExchangeRates\Domain\Profit\ProfitManager:
         class: App\ExchangeRates\Domain\Profit\ProfitManagerImpl

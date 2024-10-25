@@ -2,7 +2,7 @@
 
 namespace App\ExchangeRates\Domain\Port;
 
-interface ExchangeRateProvider
+interface ExchangeRatesProvider
 {
     /** @return ExchangeRate[] */
     public function fetch(Filter $filter): array;

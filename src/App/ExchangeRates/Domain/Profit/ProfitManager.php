@@ -8,5 +8,5 @@ use App\ExchangeRates\Domain\Port\ExchangeRate;
 interface ProfitManager
 {
     /** @return ExchangeRateView[] */
-    public function modify(ExchangeRate ...$exchangeRates): array;
+    public function handle(ExchangeRate ...$exchangeRates): array;
 }

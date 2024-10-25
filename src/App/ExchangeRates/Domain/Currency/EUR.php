@@ -7,19 +7,23 @@ use App\ExchangeRates\Domain\Currency;
 class EUR implements Currency
 {
     private $averagePrice;
+    private $buyProfit;
+    private $sellProfit;
 
-    public function __construct(float $averagePrice)
+    public function __construct(float $averagePrice, float $buyProfit, float $sellProfit)
     {
         $this->averagePrice = $averagePrice;
+        $this->buyProfit = $buyProfit;
+        $this->sellProfit = $sellProfit;
     }
 
     public function getBuyPrice(): ?float
     {
-        return $this->averagePrice - 0.05;
+        return $this->averagePrice - $this->buyProfit;
     }
 
     public function getSellPrice(): float
     {
-        return $this->averagePrice + 0.07;
+        return $this->averagePrice + $this->sellProfit;
     }
 }

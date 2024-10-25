@@ -14,15 +14,15 @@ class CurrencyFactory
     {
         switch ($code) {
             case 'USD':
-                return new USD($averagePrice);
+                return new USD($averagePrice, 0.05, 0.07);
             case 'EUR':
-                return new EUR($averagePrice);
+                return new EUR($averagePrice, 0.05, 0.07);
             case 'CZK':
-                return new CZK($averagePrice);
+                return new CZK($averagePrice, 0.15);
             case 'IDR':
-                return new IDR($averagePrice);
+                return new IDR($averagePrice, 0.15);
             case 'BRL':
-                return new BRL($averagePrice);
+                return new BRL($averagePrice, 0.15);
             default:
                 throw new \InvalidArgumentException('Invalid currency code');
         }

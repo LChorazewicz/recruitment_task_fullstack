@@ -8,7 +8,7 @@ use App\ExchangeRates\Domain\Port\ExchangeRate;
 
 class ProfitManagerImpl implements ProfitManager
 {
-    public function modify(ExchangeRate ...$exchangeRates): array
+    public function handle(ExchangeRate ...$exchangeRates): array
     {
         $result = [];
         foreach ($exchangeRates as $item) {
