@@ -1,11 +1,9 @@
-// ./assets/js/components/Home.js
-
 import React, {Component} from 'react';
-import {Route, Redirect, Switch, Link} from 'react-router-dom';
+import {Route, Redirect, Switch, Link, useParams} from 'react-router-dom';
 import SetupCheck from "./SetupCheck";
+import ExchangeRates from "./ExchangeRates";
 
 class Home extends Component {
-
     render() {
         return (
             <div>
@@ -15,6 +13,7 @@ class Home extends Component {
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
                                 <Link className={"nav-link"} to={"/setup-check"}> React Setup Check </Link>
+                                <Link className={"nav-link"} to={"/exchange-rates"}> Exchange rates </Link>
                             </li>
 
                         </ul>
@@ -23,6 +22,7 @@ class Home extends Component {
                 <Switch>
                     <Redirect exact from="/" to="/setup-check" />
                     <Route path="/setup-check" component={SetupCheck} />
+                    <Route path="/exchange-rates/:date?" component={ExchangeRates} />
                 </Switch>
             </div>
         )
