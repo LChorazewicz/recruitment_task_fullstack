@@ -22,7 +22,7 @@ class Home extends Component {
                 <Switch>
                     <Redirect exact from="/" to="/setup-check" />
                     <Route path="/setup-check" component={SetupCheck} />
-                    <Route path="/exchange-rates/:date" component={ExchangeRates} />
+                    <Route path="/exchange-rates/:date?" component={ExchangeRates} />
                 </Switch>
             </div>
         )

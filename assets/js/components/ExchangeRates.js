@@ -45,7 +45,7 @@ class ExchangeRates extends Component {
     }
 
     getDefaultDate() {
-        return this.state.date ?? this.props.match.params?.date ?? 'today'
+        return this.state.date ?? this.props.match.params?.date ?? new Date().toISOString().split('T')[0]
     }
 
     render() {
@@ -68,9 +68,17 @@ class ExchangeRates extends Component {
 
         const table = (todayData, historicalData) => {
             const historicalDataExist = historicalData.length;
-            console.log(historicalDataExist)
-            const data = todayData.map((item, index) => ({
-                ...item,
+            const todayDataExist = todayData.length;
+
+            const codesFromToday = todayData.map((item) => item.code);
+            const codesFromHistorical = historicalData.map((item) => item.code);
+
+            const data = [...codesFromToday, ...codesFromHistorical].map((item, index) => ({
+                code: item,
+                name: todayDataExist ? todayData[index].name : (historicalDataExist ? historicalData[index].name : '-'),
+                base: todayDataExist ? todayData[index].base : null,
+                buy: todayDataExist ? todayData[index].buy : null,
+                sell: todayDataExist ? todayData[index].sell : null,
                 historicSell: historicalDataExist ? historicalData[index].sell : null,
                 historicBuy: historicalDataExist ? historicalData[index].buy : null,
                 historicBase: historicalDataExist ? historicalData[index].base : null,
