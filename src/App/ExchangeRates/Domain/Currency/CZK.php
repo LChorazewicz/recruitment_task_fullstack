@@ -6,6 +6,8 @@ use App\ExchangeRates\Domain\Currency;
 
 class CZK implements Currency
 {
+    public const NAME = 'CZK';
+
     private $averagePrice;
     private $sellProfit;
 

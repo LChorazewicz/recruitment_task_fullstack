@@ -6,6 +6,8 @@ use App\ExchangeRates\Domain\Currency;
 
 class BRL implements Currency
 {
+    public const NAME = 'BRL';
+
     private $averagePrice;
     private $sellProfit;
 

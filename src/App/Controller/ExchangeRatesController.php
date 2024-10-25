@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\ExchangeRates\Application\DTO\FetchDTO;
 use App\ExchangeRates\Application\Service\FetchService;
-use App\ExchangeRates\Domain\Currencies;
+use App\ExchangeRates\Domain\Currency\AvailableCurrencies;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,7 +24,7 @@ class ExchangeRatesController extends AbstractController
     public function fetch(Request $request): JsonResponse
     {
         $result = $this->fetchService->fetch(new FetchDTO(
-            $request->get('currencies', Currencies::getAvailable()),
+            AvailableCurrencies::getList(),
             new DateTimeImmutable($request->get('date', 'today'))
         ));
 

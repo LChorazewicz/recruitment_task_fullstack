@@ -6,6 +6,8 @@ use App\ExchangeRates\Domain\Currency;
 
 class EUR implements Currency
 {
+    public const NAME = 'EUR';
+
     private $averagePrice;
     private $buyProfit;
     private $sellProfit;

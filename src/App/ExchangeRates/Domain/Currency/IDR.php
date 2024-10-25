@@ -6,6 +6,8 @@ use App\ExchangeRates\Domain\Currency;
 
 class IDR implements Currency
 {
+    public const NAME = 'IDR';
+
     private $averagePrice;
     private $sellProfit;
 

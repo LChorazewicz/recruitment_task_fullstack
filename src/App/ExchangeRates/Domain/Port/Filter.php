@@ -2,7 +2,7 @@
 
 namespace App\ExchangeRates\Domain\Port;
 
-use App\ExchangeRates\Domain\Currencies;
+use App\ExchangeRates\Domain\Currency\AvailableCurrencies;
 
 class Filter
 {
@@ -29,7 +29,7 @@ class Filter
     private function validateCurrencies(array $currencies): void
     {
         foreach ($currencies as $currency) {
-            if (!in_array($currency, Currencies::getAvailable())) {
+            if (!in_array($currency, AvailableCurrencies::getList())) {
                 throw new \InvalidArgumentException('Invalid currency');
             }
         }

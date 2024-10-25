@@ -13,15 +13,15 @@ class CurrencyFactory
     public static function create(string $code, float $averagePrice): Currency
     {
         switch ($code) {
-            case 'USD':
+            case USD::NAME:
                 return new USD($averagePrice, 0.05, 0.07);
-            case 'EUR':
+            case EUR::NAME:
                 return new EUR($averagePrice, 0.05, 0.07);
-            case 'CZK':
+            case CZK::NAME:
                 return new CZK($averagePrice, 0.15);
-            case 'IDR':
+            case IDR::NAME:
                 return new IDR($averagePrice, 0.15);
-            case 'BRL':
+            case BRL::NAME:
                 return new BRL($averagePrice, 0.15);
             default:
                 throw new \InvalidArgumentException('Invalid currency code');
