@@ -48,6 +48,25 @@ class ExchangeRates extends Component {
         return this.state.date ?? this.props.match.params?.date ?? new Date().toISOString().split('T')[0]
     }
 
+    prepareData(historicalData, todayData) {
+        const historicalDataExist = historicalData.length;
+        const todayDataExist = todayData.length;
+
+        const codesFromToday = todayData.map((item) => item.code);
+        const codesFromHistorical = historicalData.map((item) => item.code);
+
+        return [...codesFromToday, ...codesFromHistorical].map((item, index) => ({
+            code: item,
+            name: todayDataExist ? todayData[index].name : (historicalDataExist ? historicalData[index].name : '-'),
+            base: todayDataExist ? todayData[index].base : null,
+            buy: todayDataExist ? todayData[index].buy : null,
+            sell: todayDataExist ? todayData[index].sell : null,
+            historicSell: historicalDataExist ? historicalData[index].sell : null,
+            historicBuy: historicalDataExist ? historicalData[index].buy : null,
+            historicBase: historicalDataExist ? historicalData[index].base : null,
+        }));
+    }
+
     render() {
         const onChange = (e) => this.onChange(e)
         const defaultValue = () => this.getDefaultDate();
@@ -67,22 +86,7 @@ class ExchangeRates extends Component {
         ]
 
         const table = (todayData, historicalData) => {
-            const historicalDataExist = historicalData.length;
-            const todayDataExist = todayData.length;
-
-            const codesFromToday = todayData.map((item) => item.code);
-            const codesFromHistorical = historicalData.map((item) => item.code);
-
-            const data = [...codesFromToday, ...codesFromHistorical].map((item, index) => ({
-                code: item,
-                name: todayDataExist ? todayData[index].name : (historicalDataExist ? historicalData[index].name : '-'),
-                base: todayDataExist ? todayData[index].base : null,
-                buy: todayDataExist ? todayData[index].buy : null,
-                sell: todayDataExist ? todayData[index].sell : null,
-                historicSell: historicalDataExist ? historicalData[index].sell : null,
-                historicBuy: historicalDataExist ? historicalData[index].buy : null,
-                historicBase: historicalDataExist ? historicalData[index].base : null,
-            }));
+            const data = this.prepareData(historicalData, todayData);
 
             return <table className={"table"}>
                 <tbody>
@@ -110,7 +114,7 @@ class ExchangeRates extends Component {
             </table>
         };
 
-        return(
+        return (
             <div>
                 <section className="row-section">
                     <div className="container">
@@ -124,12 +128,8 @@ class ExchangeRates extends Component {
                                 <div className="form-group pb-5">
                                     <label htmlFor="date">Data:</label>
                                     <input
-                                        type="date"
-                                        className="form-control"
-                                        id="date"
-                                        min={"2023-01-01"}
-                                        onChange={onChange}
-                                        value={defaultValue()}
+                                        type="date" className="form-control" id="date" min={"2023-01-01"}
+                                        onChange={onChange} value={defaultValue()}
                                     />
                                 </div>
 
@@ -145,4 +145,5 @@ class ExchangeRates extends Component {
         )
     }
 }
+
 export default ExchangeRates;
